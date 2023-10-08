@@ -7,6 +7,24 @@ Main file
 import re
 from typing import List
 import logging
+import os
+from mysql import connector
+
+
+def get_db():
+    username = 'root'
+    password = 'root'
+    host = 'localhost'
+    database = 'my_db'
+
+    connection = connector.connect(
+        user=username,
+        password=password,
+        host=host,
+        database=database
+    )
+
+    return connection
 
 
 class RedactingFormatter(logging.Formatter):

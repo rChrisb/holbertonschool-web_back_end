@@ -28,6 +28,7 @@ class RedactingFormatter(logging.Formatter):
         return filter_datum(self.fields, self.REDACTION, message,
                             self.SEPARATOR)
 
+
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 

@@ -8,6 +8,7 @@ from flask import request
 
 
 class Auth:
+    """class to manage the API authentication"""
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """Checks if authentication is required for a path."""
         return False

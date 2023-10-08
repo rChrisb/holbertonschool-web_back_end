@@ -18,6 +18,7 @@ class RedactingFormatter(logging.Formatter):
     SEPARATOR = ";"
 
     def __init__(self, fields: List[str]):
+        """init function"""
         super().__init__(self.FORMAT)
         self.fields = fields
 
@@ -27,6 +28,8 @@ class RedactingFormatter(logging.Formatter):
         return filter_datum(self.fields, self.REDACTION, message,
                             self.SEPARATOR)
 
+PII_FIELDS = ("name", "email", "phone", "ssn", "ip")
+
 
 def filter_datum(fields: List[str],
                  redaction: str, message: str, separator: str) -> str:
@@ -35,3 +38,14 @@ def filter_datum(fields: List[str],
         pattern = re.escape(field) + r'=[^' + separator + r']*'
         message = re.sub(pattern, field + '=' + redaction, message)
     return message
+
+
+def get_logger() -> logging.Logger:
+    logger = logging.getLogger("user_data")
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+    stream_handler = logging.StreamHandler()
+    formatter = RedactingFormatter(PII_FIELDS)
+    stream_handler.setFormatter(formatter)
+    logger.addHandler(stream_handler)
+    return logger

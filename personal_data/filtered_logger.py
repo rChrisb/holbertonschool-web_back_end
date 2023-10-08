@@ -5,9 +5,11 @@ Main file
 
 
 import re
+from typing import List
 
 
-def filter_datum(fields, redaction, message, separator):
+def filter_datum(fields: List[str],
+                 redaction: str, message: str, separator: str) -> str:
     """Regex-ing"""
     for field in fields:
         pattern = re.escape(field) + r'=[^' + separator + r']*'

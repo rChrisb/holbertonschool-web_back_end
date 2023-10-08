@@ -11,7 +11,7 @@ import os
 from mysql import connector
 
 
-def get_db():
+def get_db() -> connector.connection.MySQLConnection:
     username = 'root'
     password = 'root'
     host = 'localhost'

@@ -6,7 +6,7 @@
 from typing import List, TypeVar
 from flask import request
 import base64
-from api.v1.models.user import User
+from models.user import User
 from api.v1.auth.auth import Auth
 
 

@@ -3,7 +3,6 @@
 """
 import hashlib
 from models.base import Base
-from api.v1.models.user import User
 
 
 class User(Base):

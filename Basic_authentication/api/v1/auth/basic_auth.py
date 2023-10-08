@@ -7,7 +7,7 @@ from typing import List, TypeVar
 from flask import request
 
 
-Auth = __import__('auth').Auth
+from api.v1.auth.auth import Auth
 
 
 class BasicAuth(Auth):

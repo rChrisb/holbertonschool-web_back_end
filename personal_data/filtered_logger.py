@@ -12,6 +12,7 @@ from mysql import connector
 
 
 def get_db() -> connector.connection.MySQLConnection:
+    """ returns a connector to the database"""
     username = 'root'
     password = 'root'
     host = 'localhost'

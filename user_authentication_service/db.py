@@ -58,7 +58,7 @@ class DB:
         except InvalidRequestError as e:
             raise InvalidRequestError("Invalid") from e
 
-    def update_user(self, user_id: int, **kwargs):
+    def update_user(self, user_id: int, **kwargs) -> None:
         """update user info"""
         try:
             user = self.find_user_by(id=user_id)

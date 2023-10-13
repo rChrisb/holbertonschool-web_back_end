@@ -47,6 +47,7 @@ class DB:
         return new_user
 
     def find_user_by(self, **kwargs) -> User:
+        """find a user"""
         try:
             user = self._session.query(User).filter_by(**kwargs).first()
             if user is None:
@@ -57,7 +58,8 @@ class DB:
         except InvalidRequestError as e:
             raise InvalidRequestError("Invalid") from e
 
-    def update_user(self, user_id, **kwargs):
+    def update_user(self, user_id: int, **kwargs):
+        """update user info"""
         try:
             user = self.find_user_by(id=user_id)
             for key, value in kwargs.items():

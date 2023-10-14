@@ -34,7 +34,7 @@ def register_user():
         response = {
             'message': 'email already registered'
         }
-        return jsonify(response), 400
+        return jsonify(response), 200
 
 
 if __name__ == "__main__":

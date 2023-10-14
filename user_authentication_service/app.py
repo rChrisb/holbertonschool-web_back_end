@@ -51,6 +51,7 @@ def login():
 
     return response, 200
 
+
 @app.route('/sessions', methods=['DELETE'])
 def logout():
     session_id = request.cookies.get('session_id')

@@ -20,6 +20,8 @@ def register_user():
     try:
         email = request.form['email']
         password = request.form['password']
+        if email is None or password is None:
+            abort(400)
 
         user = AUTH.register_user(email, password)
 

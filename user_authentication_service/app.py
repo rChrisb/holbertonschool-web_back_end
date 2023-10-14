@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """basic flask app"""
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, make_response, abort
 from auth import Auth
 
 AUTH = Auth()
@@ -35,6 +35,24 @@ def register_user():
             'message': 'email already registered'
         }
         return jsonify(response), 400
+
+def login():
+    # Parse form data
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    # Verify login information
+    if not AUTH.valid_login(email, password):
+        abort(401)
+
+    # Create a new session
+    session_id = AUTH.create_session(email)
+
+    # Store session ID as a cookie in the response
+    response = make_response(jsonify({"email": email, "message": "logged in"}))
+    response.set_cookie("session_id", session_id)
+
+    return response
 
 
 if __name__ == "__main__":

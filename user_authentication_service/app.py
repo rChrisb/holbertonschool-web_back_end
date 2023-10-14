@@ -8,10 +8,12 @@ AUTH = Auth()
 
 app = Flask(__name)
 
+
 @app.route("/", methods=["GET"])
 def welcome():
     message = {"message": "Bienvenue"}
     return jsonify(message)
+
 
 @app.route('/users', methods=['POST'])
 def register_user():
@@ -31,6 +33,7 @@ def register_user():
             'message': 'email already registered'
         }
         return jsonify(response), 400
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")

@@ -3,6 +3,10 @@
 
 
 from flask import Flask, jsonify
+from auth import Auth
+
+
+AUTH = Auth()
 
 app = Flask(__name__)
 
@@ -11,6 +15,26 @@ app = Flask(__name__)
 def welcome():
     message = {"message": "Bienvenue"}
     return jsonify(message)
+
+
+@app.route('/users', methods=['POST'])
+def register_user():
+    try:
+        email = request.form['email']
+        password = request.form['password']
+
+        user = AUTH.register_user(email, password)
+
+        response = {
+            'email': user.email,
+            'message': 'user created'
+        }
+        return jsonify(response)
+    except ValueError as e:
+        response = {
+            'message': 'email already registered'
+        }
+        return jsonify(response), 400
 
 
 if __name__ == "__main__":

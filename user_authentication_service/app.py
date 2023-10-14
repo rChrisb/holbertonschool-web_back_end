@@ -36,23 +36,19 @@ def register_user():
         }
         return jsonify(response), 400
 
+
 def login():
-    # Parse form data
+
     email = request.form.get('email')
     password = request.form.get('password')
 
-    # Verify login information
     if not AUTH.valid_login(email, password):
         abort(401)
-
-    # Create a new session
     session_id = AUTH.create_session(email)
-
-    # Store session ID as a cookie in the response
     response = make_response(jsonify({"email": email, "message": "logged in"}))
     response.set_cookie("session_id", session_id)
 
-    return response
+    return response, 200
 
 
 if __name__ == "__main__":

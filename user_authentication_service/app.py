@@ -37,6 +37,7 @@ def register_user():
         return jsonify(response), 400
 
 
+@app.route('/sessions', methods=['POST'])
 def login():
 
     email = request.form.get('email')

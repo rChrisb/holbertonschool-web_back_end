@@ -29,12 +29,12 @@ def register_user():
             'email': user.email,
             'message': 'user created'
         }
-        return jsonify(response)
+        return jsonify(response), 200
     except ValueError as e:
         response = {
             'message': 'email already registered'
         }
-        return jsonify(response), 200
+        return jsonify(response), 400
 
 
 if __name__ == "__main__":

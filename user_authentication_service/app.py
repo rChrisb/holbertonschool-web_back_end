@@ -11,12 +11,14 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def welcome():
+    """welcome message"""
     message = {"message": "Bienvenue"}
     return jsonify(message)
 
 
 @app.route('/users', methods=['POST'])
 def register_user():
+    """user registration"""
     try:
         email = request.form['email']
         password = request.form['password']
@@ -39,6 +41,7 @@ def register_user():
 
 @app.route('/sessions', methods=['POST'])
 def login():
+    """user login"""
     email = request.form.get('email')
     password = request.form.get('password')
 
@@ -53,6 +56,7 @@ def login():
 
 @app.route('/sessions', methods=['DELETE'])
 def logout():
+    """user logout"""
     session_id = request.cookies.get('session_id')
 
     user = AUTH.get_user_from_session_id(session_id)
@@ -65,6 +69,7 @@ def logout():
 
 @app.route('/profile', methods=['GET'])
 def profile():
+    """user profile"""
     session_id = request.cookies.get('session_id')
     user = AUTH.get_user_from_session_id(session_id)
 
@@ -77,6 +82,7 @@ def profile():
 
 @app.route('/reset_password', methods=['POST'])
 def get_reset_password_token():
+    """get reset password"""
     email = request.form.get('email')
     try:
         reset_token = AUTH.get_reset_password_token(email)
@@ -91,6 +97,7 @@ def get_reset_password_token():
 
 @app.route('/reset_password', methods=['PUT'])
 def update_password():
+    """update password"""
     email = request.form.get('email')
     reset_token = request.form.get('reset_token')
     new_password = request.form.get('new_password')

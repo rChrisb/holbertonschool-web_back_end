@@ -81,7 +81,6 @@ class Auth:
 
         reset_token = str(uuid.uuid4())
         user.reset_token = reset_token
-        self._db.commit()
         return reset_token
 
 

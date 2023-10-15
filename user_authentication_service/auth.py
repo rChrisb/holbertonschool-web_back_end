@@ -90,7 +90,6 @@ def update_password(self, reset_token: str, password: str) -> None:
         hashed_password = _hash_password(password)
         user.hashed_password = hashed_password
         user.reset_token = None
-        self._db.commit()
     except NoResultFound:
         raise ValueError("Reset token not found")
 

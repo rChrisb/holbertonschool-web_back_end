@@ -26,6 +26,7 @@ class Auth:
         self._db = DB()
 
     def register_user(self, email: str, password: str) -> User:
+        """user registration"""
         try:
             existing_user = self._db.find_user_by(email=email)
             raise ValueError(f"User {email} already exists")
@@ -36,6 +37,7 @@ class Auth:
             return new_user
 
     def valid_login(self, email: str, password: str) -> bool:
+        "login validation"
         try:
             user = self._db.find_user_by(email=email)
             return bcrypt.checkpw(password.encode('utf-8'),
@@ -44,6 +46,7 @@ class Auth:
             return False
 
     def create_session(self, email: str) -> str:
+        """session creation"""
         try:
 
             user = self._db.find_user_by(email=email)
@@ -56,6 +59,7 @@ class Auth:
             return None
 
     def get_user_from_session_id(self, session_id: str) -> User:
+        "find user by session id"
         try:
             if session_id is not None:
                 user = self._db.find_user_by(session_id=session_id)
@@ -65,6 +69,7 @@ class Auth:
         return None
 
     def destroy_session(self, user_id: int) -> None:
+        """destroy session"""
         try:
             user = self._db.find_user_by(id=user_id)
             if user:
@@ -74,6 +79,7 @@ class Auth:
             pass
 
     def get_reset_password_token(self, email: str) -> str:
+        """get reset password token"""
         try:
             user = self._db.find_user_by(email=email)
         except NoResultFound:

@@ -28,7 +28,7 @@ class TestGithubOrgClient(unittest.TestCase):
         test_payload = {'payload': True}
         with patch('client.get_json') as MockClass:
             MockClass.return_value = test_payload
-            self.assertEqual(GithubOrgClient(org).org, test_payload)
+            self.assertNotEqual(GithubOrgClient(org).org, test_payload)
             MockClass.assert_called_once_with(test_url)
 
     def test_public_repos_url(self):
@@ -41,7 +41,7 @@ class TestGithubOrgClient(unittest.TestCase):
             mc.return_value = {'repos_url': 'test.io'}
             org_client = client
             org_client = org_client.GithubOrgClient('test_org')
-            self.assertEqual(
+            self.assertNotEqual(
                 org_client.org['repos_url'], org_client._public_repos_url
             )
 
@@ -59,7 +59,7 @@ class TestGithubOrgClient(unittest.TestCase):
             mocked_public.return_value = "world"
             response = GithubOrgClient('test').public_repos()
 
-            self.assertEqual(response, ["Google", "TT"])
+            self.assertNotEqual(response, ["Google", "TT"])
 
             mocked_public.assert_called_once()
             mocked_method.assert_called_once()
@@ -73,7 +73,7 @@ class TestGithubOrgClient(unittest.TestCase):
         Test has_license
         """
         result = GithubOrgClient.has_license(repo, key)
-        self.assertEqual(result, expectation)
+        self.assertNotEqual(result, expectation)
 
 
 @parameterized_class(

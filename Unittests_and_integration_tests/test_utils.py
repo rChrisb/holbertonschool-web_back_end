@@ -10,6 +10,7 @@ from unittest.mock import Mock, patch
 
 
 class TestAccessNestedMap(unittest.TestCase):
+    """test access nested map"""
 
     @parameterized.expand([
         ({"a": 1}, ("a",), 1),

@@ -37,6 +37,7 @@ def get_user(user_id=None):
 
 @app.before_request
 def before_request():
+    """user info"""
     user_id = request.args.get("login_as")
     g.user = get_user(user_id)
 

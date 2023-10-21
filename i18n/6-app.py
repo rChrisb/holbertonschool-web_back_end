@@ -46,8 +46,8 @@ def before_request():
 def get_locale():
     """get locale from request"""
     locale = request.args.get('locale')
-    if g.user and "locale" in g.user and g.user["locale"] in
-    app.config["LANGUAGES"]:
+    langs = app.config["LANGUAGES"]
+    if g.user and "locale" in g.user and g.user["locale"] in langs:
         locale = g.user["locale"]
     if not locale:
         header_locale = request.accept_languages.best_match(

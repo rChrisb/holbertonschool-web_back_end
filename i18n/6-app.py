@@ -22,9 +22,6 @@ class Config:
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
-app.config.from_object(Config)
-
-
 def get_user(user_id=None):
     """get a user"""
     if user_id is not None:
@@ -57,6 +54,9 @@ def get_locale():
     if not locale:
         locale = app.config["BABEL_DEFAULT_LOCALE"]
     return locale
+
+
+app.config.from_object(Config)
 
 
 @app.route('/')

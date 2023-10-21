@@ -26,6 +26,7 @@ app.config.from_object(Config)
 
 
 def get_user(user_id=None):
+    """get a user"""
     if user_id is not None:
         user = users.get(user_id)
     else:

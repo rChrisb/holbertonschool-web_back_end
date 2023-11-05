@@ -6,8 +6,10 @@ from functools import wraps
 
 
 def count_calls(method: Callable) -> Callable:
+    """counts calls"""
     @wraps(method)
     def wrapper(self, *args, **kwargs):
+        """wraps method"""
         # Get the qualified name of the method
         key = method.__qualname__
 

@@ -10,13 +10,9 @@ def count_calls(method: Callable) -> Callable:
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         """wraps method"""
-        # Get the qualified name of the method
         key = method.__qualname__
 
-        # Increment the call count for the method using Redis
         self._redis.incr(key)
-
-        # Call the original method and return the result
         result = method(self, *args, **kwargs)
         return result
 
@@ -28,8 +24,8 @@ class Cache:
 
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
-        # Generate a random key (e.g., using uuid)
-        key = "some_random_key"  # Replace this with your key generation logic
+
+        key = "some_random_key"
 
         # Store the input data in Redis using the random key
         self._redis.set(key, data)

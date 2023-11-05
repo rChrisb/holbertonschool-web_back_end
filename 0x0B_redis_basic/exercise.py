@@ -38,22 +38,19 @@ class Cache:
     def get_int(self, key: str) -> Optional[int]:
         return self.get(key, fn=int)
     
-    def count_calls(method: Callable) -> Callable:
-        @wraps(method)
-        def wrapper(self, *args, **kwargs):
-            # Get the qualified name of the method
-            key = method.__qualname__
+def count_calls(method: Callable) -> Callable:
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        # Get the qualified name of the method
+        key = method.__qualname__
 
-            # Increment the call count for the method
-            if key in self.call_count:
-                self.call_count[key] += 1
-            else:
-                self.call_count[key] = 1
+        # Increment the call count for the method using Redis
+        self._redis.incr(key)
 
-            # Call the original method and return the result
-            result = method(self, *args, **kwargs)
-            return result
+        # Call the original method and return the result
+        result = method(self, *args, **kwargs)
+        return result
 
-        return wrapper
+    return wrapper
 
 

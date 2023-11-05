@@ -4,11 +4,27 @@ import redis
 from typing import Optional, Callable, Union
 from functools import wraps
 
+
+def count_calls(method: Callable) -> Callable:
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        # Get the qualified name of the method
+        key = method.__qualname__
+
+        # Increment the call count for the method using Redis
+        self._redis.incr(key)
+
+        # Call the original method and return the result
+        result = method(self, *args, **kwargs)
+        return result
+
+    return wrapper
 class Cache:
     def __init__(self):
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         # Generate a random key (e.g., using uuid)
         key = "some_random_key"  # Replace this with your key generation logic
@@ -38,19 +54,6 @@ class Cache:
     def get_int(self, key: str) -> Optional[int]:
         return self.get(key, fn=int)
     
-def count_calls(method: Callable) -> Callable:
-    @wraps(method)
-    def wrapper(self, *args, **kwargs):
-        # Get the qualified name of the method
-        key = method.__qualname__
 
-        # Increment the call count for the method using Redis
-        self._redis.incr(key)
-
-        # Call the original method and return the result
-        result = method(self, *args, **kwargs)
-        return result
-
-    return wrapper
 
 

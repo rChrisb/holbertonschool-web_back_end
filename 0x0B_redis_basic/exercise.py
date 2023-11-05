@@ -34,6 +34,7 @@ def call_history(method: Callable) -> Callable:
 
     return wrapper
 class Cache:
+    """cache class"""
     def __init__(self):
         self._redis = redis.Redis()
         self._redis.flushdb()
@@ -41,6 +42,7 @@ class Cache:
     @count_calls
     @call_history
     def store(self, data: Union[str, bytes, int, float]) -> str:
+        """data storing"""
 
         key = "some_random_key"
 

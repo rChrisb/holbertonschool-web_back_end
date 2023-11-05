@@ -52,6 +52,7 @@ class Cache:
         return key
 
     def get(self, key: str, fn: Optional[Callable] = None) -> Union[str, bytes, int, float, None]:
+        """gets data"""
         # Retrieve data from Redis
         data = self._redis.get(key)
 
@@ -66,9 +67,11 @@ class Cache:
         return data
 
     def get_str(self, key: str) -> Optional[str]:
+        """gets string"""
         return self.get(key, fn=lambda data: data.decode("utf-8"))
 
     def get_int(self, key: str) -> Optional[int]:
+        """gets integer"""
         return self.get(key, fn=int)
     
 def replay(method: Callable):

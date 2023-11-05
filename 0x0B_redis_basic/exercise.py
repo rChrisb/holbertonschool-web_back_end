@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+"""redis basic"""
+
 
 import redis
 from typing import Optional, Callable, Union

@@ -2,6 +2,7 @@
 
 import redis
 from typing import Optional, Callable, Union
+from functools import wraps
 
 class Cache:
     def __init__(self):
@@ -36,5 +37,23 @@ class Cache:
 
     def get_int(self, key: str) -> Optional[int]:
         return self.get(key, fn=int)
+    
+    def count_calls(method: Callable) -> Callable:
+        @wraps(method)
+        def wrapper(self, *args, **kwargs):
+            # Get the qualified name of the method
+            key = method.__qualname__
+
+            # Increment the call count for the method
+            if key in self.call_count:
+                self.call_count[key] += 1
+            else:
+                self.call_count[key] = 1
+
+            # Call the original method and return the result
+            result = method(self, *args, **kwargs)
+            return result
+
+        return wrapper
 
 

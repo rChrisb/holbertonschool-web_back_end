@@ -5,11 +5,11 @@ export default function getResponseFromAPI() {
 
     // Resolve the promise if the operation is successful
     if (isSuccess) {
-      const responseData = { message: "API call successful" };
+      const responseData = { message: 'API call successful' };
       resolve(responseData);
     } else {
       // Reject the promise if there is an error
-      const error = new Error("API call failed");
+      const error = new Error('API call failed');
       reject(error);
     }
   });

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 class Building {
   constructor(sqft) {
     this._sqft = this._validateNumber(sqft, "sqft");

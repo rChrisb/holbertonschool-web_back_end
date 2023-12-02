@@ -1,1 +1,5 @@
-10 - api / api.js, 10 - api / api.test.js, 10 - api / package.json;
+function displayMessage (arg) {
+  console.log(arg);
+}
+
+module.exports = displayMessage;

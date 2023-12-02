@@ -1,12 +1,12 @@
-const fs = require("fs");
+const fs = require('fs');
 
-function countStudents(CsvFile) {
+function countStudents (CsvFile) {
   try {
-    const data = fs.readFileSync(CsvFile, "utf8");
-    const lines = data.trim().split("\n");
+    const data = fs.readFileSync(CsvFile, 'utf8');
+    const lines = data.trim().split('\n');
     const studentsByField = {};
     for (let i = 1; i < lines.length; i += 1) {
-      const [name, , , field] = lines[i].split(",");
+      const [name, , , field] = lines[i].split(',');
       if (Object.prototype.hasOwnProperty.call(studentsByField, field)) {
         studentsByField[field].push(name);
       } else {
@@ -20,7 +20,7 @@ function countStudents(CsvFile) {
         console.log(
           `Number of students in ${field}: ${
             students.length
-          }. List: ${students.join(", ")}`
+          }. List: ${students.join(', ')}`
         );
       }
     }

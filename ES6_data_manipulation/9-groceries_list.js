@@ -1,11 +1,10 @@
-export default function cleanSet(set, string) {
-  if (!string || !string.length) return '';
-  let value = '';
-  for (const el of set) {
-    if (el && el.startsWith(string)) {
-      value
-        += value.length === 0 ? el.replace(string, '') : el.replace(string, '-');
-    }
-  }
-  return value;
+export default function groceriesList() {
+  const list = new Map();
+  list.set("Apples", 10);
+  list.set("Tomatoes", 10);
+  list.set("Pasta", 1);
+  list.set("Rice", 1);
+  list.set("Banana", 5);
+
+  return list;
 }

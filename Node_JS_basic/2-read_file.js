@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function countStudents (CsvFile) {
+function countStudents(CsvFile) {
   try {
     const data = fs.readFileSync(CsvFile, 'utf8');
     const lines = data.trim().split('\n');
@@ -20,7 +20,7 @@ function countStudents (CsvFile) {
         console.log(
           `Number of students in ${field}: ${
             students.length
-          }. List: ${students.join(', ')}`
+          }. List: ${students.join(', ')}`,
         );
       }
     }
